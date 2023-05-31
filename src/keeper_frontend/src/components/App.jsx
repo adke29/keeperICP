@@ -3,14 +3,14 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
-import {keeper_backend} from "../../../declarations/keeper_backend";
+import { keeper_backend } from "../../../declarations/keeper_backend";
 
 function App() {
   const [notes, updateNotes] = useState([]);
   async function addNote(newNotes) {
     if (newNotes.title !== "" && newNotes.content !== "") {
       loading(true);
-      await keeper_backend.createNote(newNotes.title,newNotes.content);
+      await keeper_backend.createNote(newNotes.title, newNotes.content);
       loading(false);
       fetchData();
     } else {
@@ -23,24 +23,24 @@ function App() {
     loading(false);
     fetchData();
   }
-  async function fetchData(){
+  async function fetchData() {
     loading(true);
     updateNotes(await keeper_backend.showNotes());
     loading(false);
   }
-  
-  useEffect(()=>{
-    fetchData();
-  },[]);
 
-  function loading(status){
-    const textarea = document.querySelector("textarea");
-    if(status){
-      textarea.disabled = true;
-      textarea.placeholder = "Updating....";
-    }else{
-      textarea.disabled = false;
-      textarea.placeholder = "Take a note...";
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  function loading(status) {
+    const input = document.querySelector("input");
+    if (status) {
+      input.disabled = true;
+      input.placeholder = "Updating....";
+    } else {
+      input.disabled = false;
+      input.placeholder = "Title";
     }
   }
 

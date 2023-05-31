@@ -20,28 +20,29 @@ export default function CreateArea(props) {
   return (
     <div>
       <form>
-        {isExpanded && (
-          <Zoom in={true}>
-            <input
-              name="title"
-              placeholder="Title"
-              value={note.title}
-              onChange={inputNote}
-            />
-          </Zoom>
-        )}
 
-        <textarea
-          name="content"
-          placeholder="Take a note..."
-          rows={isExpanded ? "3" : "1"}
-          value={note.content}
+
+        <input
+          name="title"
+          placeholder="Title"
+          value={note.title}
           onChange={inputNote}
           onFocus={() => {
             changeState(true);
           }}
         />
 
+
+        {isExpanded && (
+          <Zoom in={true}><textarea
+            name="content"
+            placeholder="Take a note..."
+            rows={isExpanded ? "3" : "1"}
+            value={note.content}
+            onChange={inputNote}
+
+          /></Zoom>
+        )}
         {isExpanded && (
           <Zoom in={true}>
             <button
